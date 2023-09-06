@@ -2,6 +2,7 @@ package com.land.tinnova.api.controller;
 
 import com.land.tinnova.api.dto.VeiculoRequestDTO;
 import com.land.tinnova.api.dto.VeiculoResponseDTO;
+import com.land.tinnova.api.dto.VeiculoUpdateRequestDTO;
 import com.land.tinnova.api.service.VeiculoService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -43,6 +44,19 @@ public class VeiculoController {
     public ResponseEntity<Void> editar(@RequestBody @Valid VeiculoRequestDTO dto,
                                                      @PathVariable Long id) {
         service.editar(dto, id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Void> atualizar(@RequestBody @Valid VeiculoUpdateRequestDTO dto,
+                                       @PathVariable Long id) {
+        service.update(dto, id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> apagar(@PathVariable Long id) {
+        service.apagar(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

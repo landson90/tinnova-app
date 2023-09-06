@@ -3,6 +3,7 @@ package com.land.tinnova.api.service;
 import com.land.tinnova.api.config.ObjectNotFoundException;
 import com.land.tinnova.api.dto.VeiculoRequestDTO;
 import com.land.tinnova.api.dto.VeiculoResponseDTO;
+import com.land.tinnova.api.dto.VeiculoUpdateRequestDTO;
 import com.land.tinnova.api.mapper.VeiculoMapper;
 import com.land.tinnova.api.model.VeiculoEntity;
 import com.land.tinnova.api.repository.VeiculoRepository;
@@ -54,6 +55,20 @@ public class VeiculoService {
 
     }
 
+    public void apagar(Long id) {
+        var veiculo = this.validProductToId(id);
+        veiculoRepository.delete(veiculo);
+    }
+
+    public void update(VeiculoUpdateRequestDTO dto, Long id) {
+        var veiculo = this.validProductToId(id);
+        var veiculoParaEditar = this.getEntity(dto);
+        BeanUtils.copyProperties(veiculoParaEditar, veiculo, "id", "ano", "createAt", "vendido");
+        veiculoRepository.save(veiculo);
+
+    }
+
+
     private VeiculoEntity validProductToId(Long id) {
         Optional<VeiculoEntity> product = veiculoRepository.findById(id);
         return product.orElseThrow(() -> new ObjectNotFoundException(
@@ -61,5 +76,20 @@ public class VeiculoService {
         ));
     }
 
+    private VeiculoEntity getEntity(VeiculoUpdateRequestDTO dto) {
+        return VeiculoEntity.builder()
+                .descricao(dto.getDescricao())
+                .marca(dto.getMarca())
+                .build();
+    }
+
+    private VeiculoEntity toVeiculoEntity(VeiculoRequestDTO dto) {
+        return VeiculoEntity.builder()
+                .descricao(dto.getDescricao())
+                .marca(dto.getMarca())
+                .ano(dto.getAno())
+                .vendido(dto.getVendido())
+                .build();
+    }
 
 }

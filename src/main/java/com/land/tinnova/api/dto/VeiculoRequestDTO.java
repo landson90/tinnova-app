@@ -18,6 +18,6 @@ public class VeiculoRequestDTO {
     @NotEmpty(message = "O Campo titulo é obrigatório .")
     private String marca;
     private Integer ano;
-    private String descicao;
+    private String descricao;
     private Boolean vendido;
 }

@@ -24,7 +24,7 @@ public class VeiculoEntity {
     private Long id;
     private String marca;
     private Integer ano;
-    private String descicao;
+    private String descricao;
     private Boolean vendido;
 
     @CreationTimestamp

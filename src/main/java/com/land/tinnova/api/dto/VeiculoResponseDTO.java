@@ -20,7 +20,7 @@ public class VeiculoResponseDTO {
     private Long id;
     private String marca;
     private Integer ano;
-    private String descicao;
+    private String descricao;
     private Boolean vendido;
     private OffsetDateTime createAt;
     private OffsetDateTime updateAt;
