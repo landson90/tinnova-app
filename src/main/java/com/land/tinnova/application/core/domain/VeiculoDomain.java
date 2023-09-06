@@ -1,5 +1,7 @@
 package com.land.tinnova.application.core.domain;
 
+import java.time.OffsetDateTime;
+
 public class VeiculoDomain {
 
     private Long id;
@@ -8,16 +10,21 @@ public class VeiculoDomain {
     private String descicao;
     private Boolean vendido;
 
+    private OffsetDateTime createAt;
+    private OffsetDateTime updateAt;
+
 
     public VeiculoDomain() {
     }
 
-    public VeiculoDomain(Long id, String marca, Integer ano, String descicao, Boolean vendido) {
+    public VeiculoDomain(Long id, String marca, Integer ano, String descicao, Boolean vendido, OffsetDateTime createAt, OffsetDateTime updateAt) {
         this.id = id;
         this.marca = marca;
         this.ano = ano;
         this.descicao = descicao;
         this.vendido = vendido;
+        this.createAt = createAt;
+        this.updateAt = updateAt;
     }
 
     public Long getId() {
@@ -58,5 +65,21 @@ public class VeiculoDomain {
 
     public void setVendido(Boolean vendido) {
         this.vendido = vendido;
+    }
+
+    public OffsetDateTime getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(OffsetDateTime createAt) {
+        this.createAt = createAt;
+    }
+
+    public OffsetDateTime getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(OffsetDateTime updateAt) {
+        this.updateAt = updateAt;
     }
 }

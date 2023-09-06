@@ -22,10 +22,30 @@ public class InsertVeiculoAdapter implements InsertVeiculoOutputPort {
 
     @Override
     public VeiculoDomain insert(VeiculoDomain veiculoDomain) {
-        var veiculoEntity = mapperAdapters.toVeiculoEntity(veiculoDomain);
+        var veiculoEntity = getVeiculoEntity(veiculoDomain);
         var veiculoSalvo = repository.save(veiculoEntity);
-        var domain = mapperAdapters.toVeiculoDomain(veiculoSalvo);
-        return domain;
+        return getVeiculoDomain(veiculoSalvo);
+    }
+
+    private VeiculoEntity getVeiculoEntity(VeiculoDomain domain) {
+        return VeiculoEntity.builder()
+                .descicao(domain.getDescicao())
+                .ano(domain.getAno())
+                .vendido(domain.getVendido())
+                .marca(domain.getMarca())
+                .build();
+    }
+
+    private VeiculoDomain getVeiculoDomain(VeiculoEntity entity) {
+       return new VeiculoDomain(
+               entity.getId(),
+               entity.getMarca(),
+               entity.getAno(),
+               entity.getDescicao(),
+               entity.getVendido(),
+               entity.getCreateAt(),
+               entity.getUpdateAt()
+       );
     }
 
 }
