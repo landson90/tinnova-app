@@ -1,12 +1,13 @@
-package com.land.tinnova.adapters.out.respository.entity;
+package com.land.tinnova.api.dto;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
 import java.time.OffsetDateTime;
 
 
@@ -14,24 +15,13 @@ import java.time.OffsetDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "tb_veiculo")
-public class VeiculoEntity {
+public class VeiculoResponseDTO {
 
-    @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
     private String marca;
     private Integer ano;
     private String descicao;
     private Boolean vendido;
-
-    @CreationTimestamp
-    @Column(nullable = false, columnDefinition = "datetime")
     private OffsetDateTime createAt;
-
-    @UpdateTimestamp
-    @Column(nullable = false, columnDefinition = "datetime")
     private OffsetDateTime updateAt;
-
 }
