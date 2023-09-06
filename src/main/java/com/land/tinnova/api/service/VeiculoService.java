@@ -1,9 +1,7 @@
 package com.land.tinnova.api.service;
 
 import com.land.tinnova.api.config.ObjectNotFoundException;
-import com.land.tinnova.api.dto.VeiculoRequestDTO;
-import com.land.tinnova.api.dto.VeiculoResponseDTO;
-import com.land.tinnova.api.dto.VeiculoUpdateRequestDTO;
+import com.land.tinnova.api.dto.*;
 import com.land.tinnova.api.mapper.VeiculoMapper;
 import com.land.tinnova.api.model.VeiculoEntity;
 import com.land.tinnova.api.repository.VeiculoRepository;
@@ -68,6 +66,15 @@ public class VeiculoService {
 
     }
 
+    public List<VeiculoConsultaPorAnoDTO> getListarPorAno() {
+        var resposta = veiculoRepository.getListarPorAno();
+        return resposta;
+    }
+
+    public List<VeiculoConsultaPorMarcaDTO> getListarPorMarca() {
+        var resposta = veiculoRepository.getListarPorMarca();
+        return resposta;
+    }
 
     private VeiculoEntity validProductToId(Long id) {
         Optional<VeiculoEntity> product = veiculoRepository.findById(id);
@@ -75,6 +82,8 @@ public class VeiculoService {
                 "Nao temos veiculo associado para esse código  " + id
         ));
     }
+
+
 
     private VeiculoEntity getEntity(VeiculoUpdateRequestDTO dto) {
         return VeiculoEntity.builder()

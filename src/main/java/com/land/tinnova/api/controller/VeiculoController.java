@@ -1,8 +1,6 @@
 package com.land.tinnova.api.controller;
 
-import com.land.tinnova.api.dto.VeiculoRequestDTO;
-import com.land.tinnova.api.dto.VeiculoResponseDTO;
-import com.land.tinnova.api.dto.VeiculoUpdateRequestDTO;
+import com.land.tinnova.api.dto.*;
 import com.land.tinnova.api.service.VeiculoService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -59,4 +57,17 @@ public class VeiculoController {
         service.apagar(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+
+    @GetMapping("/listar-por-ano")
+    public ResponseEntity<List<VeiculoConsultaPorAnoDTO>> getFiltroPorAno() {
+        var response = service.getListarPorAno();
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @GetMapping("/listar-por-marca")
+    public ResponseEntity<List<VeiculoConsultaPorMarcaDTO>> getFiltroPorMarca() {
+        var response = service.getListarPorMarca();
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
 }
