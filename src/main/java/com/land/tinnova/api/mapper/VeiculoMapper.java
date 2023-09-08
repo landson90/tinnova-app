@@ -14,8 +14,4 @@ public interface VeiculoMapper {
 
     VeiculoRequestDTO toVeiculoRequestDTO(VeiculoRequestDTO veiculoRequestDTO);
 
-    VeiculoEntity toVeiculoEntity(VeiculoRequestDTO veiculoRequestDTO);
-
-
-
 }

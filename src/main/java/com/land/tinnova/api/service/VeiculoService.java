@@ -29,21 +29,21 @@ public class VeiculoService {
     public VeiculoResponseDTO salvar(
             VeiculoRequestDTO dto
     ) {
-        var entity = veiculoMapper.toVeiculoEntity(dto);
+        var entity =  toVeiculoEntity(dto);
         var response = veiculoRepository.save(entity);
-        return veiculoMapper.toVeiculoResponseDTO(response);
+        return getVeiculoResponseDTO(response);
     }
 
     public List<VeiculoResponseDTO> getVeiculos() {
         var listaDeVeiculos = veiculoRepository.findAll();
-        var resposta = listaDeVeiculos.stream().map(m -> veiculoMapper.toVeiculoResponseDTO(m))
+        var resposta = listaDeVeiculos.stream().map(m -> getVeiculoResponseDTO(m))
                 .collect(Collectors.toList());
         return resposta;
     }
 
     public VeiculoResponseDTO show(Long id) {
         var veiculo = this.validProductToId(id);
-        return veiculoMapper.toVeiculoResponseDTO(veiculo);
+        return getVeiculoResponseDTO(veiculo);
     }
 
     public void editar(VeiculoRequestDTO dto, Long id) {
@@ -98,6 +98,18 @@ public class VeiculoService {
                 .marca(dto.getMarca())
                 .ano(dto.getAno())
                 .vendido(dto.getVendido())
+                .build();
+    }
+
+    private VeiculoResponseDTO getVeiculoResponseDTO(VeiculoEntity entity) {
+        return  VeiculoResponseDTO.builder()
+                .id(entity.getId())
+                .marca(entity.getMarca())
+                .ano(entity.getAno())
+                .descricao(entity.getDescricao())
+                .vendido(entity.getVendido())
+                .createAt(entity.getCreateAt())
+                .updateAt(entity.getUpdateAt())
                 .build();
     }
 
